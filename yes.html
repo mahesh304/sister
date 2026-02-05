@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>💕 YES! Vani Said Yes! 💕</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💕</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800&family=Quicksand:wght@300;400;500;600;700&family=Permanent+Marker&family=Caveat:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --pink-light: #fff0f5;
+            --pink-soft: #ffb6c1;
+            --pink-medium: #ff85a2;
+            --pink-deep: #e75480;
+            --purple-soft: #e8d5f2;
+            --purple-medium: #b388eb;
+            --mint: #b5ead7;
+            --gold: #ffd700;
+            --white: #ffffff;
+            --text-dark: #4a3f44;
+            
+            --font-fun: 'Baloo 2', cursive;
+            --font-clean: 'Quicksand', sans-serif;
+            --font-marker: 'Permanent Marker', cursive;
+            --font-handwritten: 'Caveat', cursive;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: var(--font-clean);
+            background: linear-gradient(135deg, #fdf2f8 0%, #fce7f3 50%, #f5d0fe 100%);
+            min-height: 100vh;
+        }
+
+        /* ============================================
+           BEAUTIFUL INTRO SCREEN - UI/UX DESIGNED
+           ============================================ */
+        .intro-screen {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: linear-gradient(160deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1), visibility 1.2s ease;
+            overflow: hidden;
+        }
+
+        .intro-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        /* Animated gradient overlay */
+        .intro-screen::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: 
+                radial-gradient(ellipse at 20% 0%, rgba(255, 107, 157, 0.18) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 100%, rgba(179, 136, 235, 0.18) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(255, 182, 193, 0.12) 0%, transparent 60%);
+            animation: gradientShift 8s ease-in-out infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; }
+        }
+
+        /* Floating stars background */
+        .stars-container {
+            position: absolute;
+            width: 100%; height: 100%;
+            overflow: hidden;
+        }
+
+        .star {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s ease-in-out infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        /* Main intro content */
+        .intro-content {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* Photo collage - Polaroid style arrangement */
+        .photo-collage {
+            position: relative;
+            width: 340px;
+            height: 300px;
+            margin-bottom: 35px;
+        }
+
+        .polaroid {
+            position: absolute;
+            background: white;
+            padding: 10px 10px 45px 10px;
+            border-radius: 4px;
+            box-shadow: 
+                0 15px 35px rgba(0, 0, 0, 0.35),
+                0 5px 15px rgba(0, 0, 0, 0.25);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+
+        .polaroid:hover {
+            z-index: 100 !important;
+            transform: scale(1.12) rotate(0deg) !important;
+            box-shadow: 
+                0 25px 50px rgba(255, 107, 157, 0.5),
+                0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .polaroid img {
+            width: 130px;
+            height: 130px;
+            object-fit: cover;
+            display: block;
+            border-radius: 2px;
+        }
+
+        .polaroid-caption {
+            position: absolute;
+            bottom: 12px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-family: var(--font-handwritten);
+            font-size: 16px;
+            color: #555;
+        }
+
+        /* Polaroid positions - scattered aesthetic */
+        .polaroid:nth-child(1) {
+            left: 0;
+            top: 50px;
+            transform: rotate(-15deg);
+            z-index: 1;
+            animation: floatPolaroid1 6s ease-in-out infinite;
+        }
+
+        .polaroid:nth-child(2) {
+            left: 50%;
+            top: 0;
+            transform: translateX(-50%) rotate(5deg);
+            z-index: 3;
+            animation: floatPolaroid2 6s ease-in-out infinite 0.5s;
+        }
+
+        .polaroid:nth-child(3) {
+            right: 0;
+            top: 60px;
+            transform: rotate(12deg);
+            z-index: 2;
+            animation: floatPolaroid3 6s ease-in-out infinite 1s;
+        }
+
+        @keyframes floatPolaroid1 {
+            0%, 100% { transform: rotate(-15deg) translateY(0); }
+            50% { transform: rotate(-12deg) translateY(-10px); }
+        }
+
+        @keyframes floatPolaroid2 {
+            0%, 100% { transform: translateX(-50%) rotate(5deg) translateY(0); }
+            50% { transform: translateX(-50%) rotate(3deg) translateY(-12px); }
+        }
+
+        @keyframes floatPolaroid3 {
+            0%, 100% { transform: rotate(12deg) translateY(0); }
+            50% { transform: rotate(15deg) translateY(-10px); }
+        }
+
+        /* Heart decoration between photos */
+        .heart-deco {
+            position: absolute;
+            font-size: 26px;
+            animation: heartPop 2s ease-in-out infinite;
+            filter: drop-shadow(0 0 12px rgba(255, 107, 157, 0.7));
+        }
+
+        .heart-deco:nth-child(4) { left: 33%; top: 65%; animation-delay: 0s; }
+        .heart-deco:nth-child(5) { left: 58%; top: 72%; animation-delay: 0.3s; }
+        .heart-deco:nth-child(6) { left: 45%; top: 88%; animation-delay: 0.6s; }
+
+        @keyframes heartPop {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.25); opacity: 1; }
+        }
+
+        /* Title section */
+        .intro-title {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .intro-title h1 {
+            font-family: var(--font-marker);
+            font-size: clamp(2.5rem, 10vw, 3.8rem);
+            color: transparent;
+            background: linear-gradient(135deg, #ff6b9d, #ffb6c1, #b388eb, #ff6b9d);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            animation: gradientText 4s ease infinite;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+
+        @keyframes gradientText {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .intro-title .subtitle {
+            font-family: var(--font-handwritten);
+            font-size: clamp(1.5rem, 6vw, 2rem);
+            color: rgba(255, 255, 255, 0.92);
+            margin-bottom: 6px;
+        }
+
+        .intro-title .date {
+            font-family: var(--font-clean);
+            font-size: 1rem;
+            color: rgba(255, 182, 193, 0.85);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+
+        /* Progress indicator - elegant line */
+        .progress-line {
+            width: 220px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 4px;
+            margin-top: 40px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 0;
+            background: linear-gradient(90deg, var(--pink-soft), var(--purple-medium), var(--mint));
+            border-radius: 4px;
+            animation: progressLoad 4.5s ease-in-out forwards;
+        }
+
+        @keyframes progressLoad {
+            0% { width: 0; }
+            100% { width: 100%; }
+        }
+
+        .loading-text {
+            margin-top: 15px;
+            font-family: var(--font-clean);
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.55);
+            letter-spacing: 3px;
+        }
+
+        /* Mobile adjustments */
+        @media (max-width: 400px) {
+            .photo-collage {
+                width: 300px;
+                height: 260px;
+            }
+            .polaroid img {
+                width: 105px;
+                height: 105px;
+            }
+            .polaroid {
+                padding: 8px 8px 38px 8px;
+            }
+            .polaroid-caption {
+                font-size: 14px;
+            }
+        }
+
+        /* ============================================
+           MAIN CONTENT
+           ============================================ */
+        .main-content {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+            position: relative;
+        }
+
+        /* Subtle magic background */
+        .magic-bg {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .magic-sparkle {
+            position: absolute;
+            font-size: 16px;
+            animation: sparkleGlow 3s ease-in-out infinite;
+            opacity: 0.6;
+        }
+
+        @keyframes sparkleGlow {
+            0%, 100% { opacity: 0.3; transform: scale(0.8); }
+            50% { opacity: 0.8; transform: scale(1.2); }
+        }
+
+        /* Content card */
+        .content-wrapper {
+            position: relative;
+            z-index: 10;
+            max-width: 450px;
+            width: 100%;
+        }
+
+        .celebration-heart {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .big-heart {
+            font-size: 80px;
+            display: inline-block;
+            animation: heartPulse 1.5s ease-in-out infinite;
+            filter: drop-shadow(0 0 30px rgba(231, 84, 128, 0.5));
+        }
+
+        @keyframes heartPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+        }
+
+        .main-title {
+            font-family: var(--font-marker);
+            font-size: clamp(2.5rem, 10vw, 3.5rem);
+            color: var(--pink-deep);
+            text-align: center;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 0 var(--purple-soft);
+        }
+
+        .subtitle {
+            font-family: var(--font-handwritten);
+            font-size: clamp(1.5rem, 6vw, 2rem);
+            color: var(--purple-medium);
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .message-text {
+            font-family: var(--font-fun);
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            text-align: center;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .telugu-text {
+            font-family: var(--font-handwritten);
+            font-size: 1.4rem;
+            color: var(--pink-deep);
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        /* Promise Card - Cleaner design */
+        .promise-card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 15px 40px rgba(231, 84, 128, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .promise-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 4px;
+            background: linear-gradient(90deg, var(--pink-soft), var(--purple-medium), var(--mint));
+        }
+
+        .promise-card h2 {
+            font-family: var(--font-marker);
+            font-size: 1.4rem;
+            color: var(--pink-deep);
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .promise-card p {
+            font-family: var(--font-clean);
+            color: var(--text-dark);
+            line-height: 1.8;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .promise-card .highlight {
+            font-family: var(--font-handwritten);
+            color: var(--purple-medium);
+            font-size: 1.3rem;
+        }
+
+        /* Photo gallery in yes page */
+        .photo-memories {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .memory-photo {
+            width: 100px;
+            height: 100px;
+            border-radius: 15px;
+            overflow: hidden;
+            border: 3px solid white;
+            box-shadow: 0 8px 25px rgba(231, 84, 128, 0.25);
+            transition: transform 0.3s ease;
+        }
+
+        .memory-photo:hover {
+            transform: scale(1.1) rotate(3deg);
+        }
+
+        .memory-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Love meter - simplified */
+        .love-section {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .love-section p {
+            font-family: var(--font-fun);
+            color: var(--text-dark);
+            margin-bottom: 10px;
+        }
+
+        .love-bar {
+            height: 15px;
+            background: #f0f0f0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+
+        .love-fill {
+            height: 100%;
+            width: 0;
+            background: linear-gradient(90deg, var(--pink-soft), var(--pink-deep), var(--purple-medium));
+            border-radius: 10px;
+            animation: fillLove 2s ease-out 1s forwards;
+        }
+
+        @keyframes fillLove {
+            to { width: 100%; }
+        }
+
+        .love-label {
+            font-family: var(--font-marker);
+            color: var(--pink-deep);
+            font-size: 1.2rem;
+        }
+
+        /* Back button */
+        .back-btn {
+            display: inline-block;
+            padding: 15px 40px;
+            font-family: var(--font-fun);
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: white;
+            background: linear-gradient(135deg, var(--pink-medium), var(--purple-medium));
+            border-radius: 50px;
+            text-decoration: none;
+            box-shadow: 0 8px 25px rgba(231, 84, 128, 0.35);
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(231, 84, 128, 0.45);
+        }
+
+        /* Footer */
+        .footer-text {
+            text-align: center;
+        }
+
+        .footer-text p {
+            font-family: var(--font-handwritten);
+            font-size: 1.3rem;
+            color: var(--purple-medium);
+            margin-bottom: 10px;
+        }
+
+        .footer-emojis {
+            font-size: 1.8rem;
+            animation: gentleBounce 2s ease-in-out infinite;
+        }
+
+        @keyframes gentleBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        /* Rainbow line */
+        .rainbow-line {
+            position: fixed;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--pink-soft), var(--purple-medium), var(--mint), var(--pink-soft));
+            background-size: 200% 100%;
+            animation: rainbowSlide 3s linear infinite;
+            z-index: 100;
+        }
+
+        .rainbow-line.top { top: 0; }
+        .rainbow-line.bottom { bottom: 0; }
+
+        @keyframes rainbowSlide {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 200% 50%; }
+        }
+    </style>
+</head>
+<body>
+    <!-- BEAUTIFUL INTRO SCREEN WITH POLAROID PHOTOS -->
+    <div class="intro-screen" id="introScreen">
+        <div class="stars-container" id="starsContainer"></div>
+        
+        <div class="intro-content">
+            <!-- Polaroid Photo Collage -->
+            <div class="photo-collage">
+                <div class="polaroid">
+                    <img src="duo1.jpeg" alt="Us">
+                    <span class="polaroid-caption">Us 💕</span>
+                </div>
+                <div class="polaroid">
+                    <img src="duo2.jpeg" alt="Together">
+                    <span class="polaroid-caption">Together ✨</span>
+                </div>
+                <div class="polaroid">
+                    <img src="duo3.jpeg" alt="Forever">
+                    <span class="polaroid-caption">Forever 💖</span>
+                </div>
+                <span class="heart-deco">💕</span>
+                <span class="heart-deco">💖</span>
+                <span class="heart-deco">💗</span>
+            </div>
+            
+            <!-- Title -->
+            <div class="intro-title">
+                <h1>She Said YES!</h1>
+                <p class="subtitle">Vani & Her Love 💕</p>
+                <p class="date">October 21, 2024</p>
+            </div>
+            
+            <!-- Progress -->
+            <div class="progress-line">
+                <div class="progress-fill"></div>
+            </div>
+            <p class="loading-text">Loading our story...</p>
+        </div>
+    </div>
+
+    <!-- RAINBOW LINES -->
+    <div class="rainbow-line top"></div>
+    <div class="rainbow-line bottom"></div>
+
+    <!-- MAGIC BACKGROUND -->
+    <div class="magic-bg" id="magicBg"></div>
+
+    <!-- MAIN CONTENT -->
+    <div class="main-content">
+        <div class="content-wrapper">
+            <div class="celebration-heart">
+                <span class="big-heart">💕</span>
+            </div>
+            
+            <h1 class="main-title">YAYYYY! 🎉</h1>
+            <p class="subtitle">Vani Said YES! 💖</p>
+            
+            <p class="message-text">You just made me the happiest person in the entire universe! Naa prayers ki answer vachindi! 🙏✨</p>
+            <p class="telugu-text">"Nuvvu Oopukunav Vani... Naa Heart Full Aipoyindi!" 💖</p>
+            
+            <!-- Photo memories -->
+            <div class="photo-memories">
+                <div class="memory-photo"><img src="duo1.jpeg" alt="Memory 1"></div>
+                <div class="memory-photo"><img src="duo2.jpeg" alt="Memory 2"></div>
+                <div class="memory-photo"><img src="duo3.jpeg" alt="Memory 3"></div>
+            </div>
+            
+            <div class="promise-card">
+                <h2>💍 Naa Promise 💝</h2>
+                <p>I promise to love you unconditionally, make you smile every day, hold your hand through every storm, and be your best friend forever!</p>
+                <p>After marriage, mana bullet midha long drive... just you & me! 🏍️💕</p>
+                <p class="highlight">"Nuvve Naa Lokam Mottu, Eppudu & Ennenno!" 💕</p>
+            </div>
+            
+            <div class="love-section">
+                <p>💕 My Love For You 💕</p>
+                <div class="love-bar">
+                    <div class="love-fill"></div>
+                </div>
+                <p class="love-label">∞ INFINITY! ∞</p>
+            </div>
+            
+            <div style="text-align: center;">
+                <a href="index.html" class="back-btn">🦋 Relive Our Story 💕</a>
+            </div>
+            
+            <div class="footer-text">
+                <p>"Oct 21, 2024 - The Day My Life Became Complete!" 💖</p>
+                <div class="footer-emojis">🦋💕🏍️💕🦋</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Create twinkling stars
+        function createStars() {
+            const container = document.getElementById('starsContainer');
+            for (let i = 0; i < 80; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                star.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                star.style.width = (Math.random() * 2 + 2) + 'px';
+                star.style.height = star.style.width;
+                container.appendChild(star);
+            }
+        }
+
+        // Create subtle sparkles in main content
+        function createMagicSparkles() {
+            const container = document.getElementById('magicBg');
+            const sparkles = ['✨', '💫', '⭐'];
+            
+            for (let i = 0; i < 12; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'magic-sparkle';
+                sparkle.textContent = sparkles[Math.floor(Math.random() * sparkles.length)];
+                sparkle.style.left = Math.random() * 100 + '%';
+                sparkle.style.top = Math.random() * 100 + '%';
+                sparkle.style.animationDelay = Math.random() * 3 + 's';
+                container.appendChild(sparkle);
+            }
+        }
+
+        // Initialize
+        createStars();
+        createMagicSparkles();
+
+        // Hide intro after 5 seconds
+        setTimeout(() => {
+            document.getElementById('introScreen').classList.add('hidden');
+        }, 5000);
+    </script>
+</body>
+</html>
